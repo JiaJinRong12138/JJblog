@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.dao.BlogMapper">
+
+    <!-- 通过id查询User -->
+    <select id="getUserById" parameterType="pojoVO" resultType="user">
+        select * from user
+        where id = #{user.id}
+    </select>
+
+    <!-- 通过账户密码查询用户 -->
+    <select id="getUserByUsernameAndPassword" parameterType="pojoVO" resultType="user">
+        select * from user
+        where username = #{user.username} and password = #{user.password}
+    </select>
+
+    <!-- 查询所有blog 表的数据 -->
+    <select id="getAllBlog" resultType="blog">
+        SELECT * FROM blog
+    </select>
+
+    <!-- 根据用户id 查询blog -->
+    <select id="getBlogByUserId" resultType="blog" parameterType="pojoVO">
+        SELECT * FROM blog
+        where userid = #{user.id}
+    </select>
+
+    <!-- 根据id 查询博客 -->
+    <select id="getBlogById" resultType="blog" parameterType="int">
+        select * from blog
+        where id = #{id}
+    </select>
+
+    <select id="getHFByBlogId" parameterType="int" resultType="hf">
+        SELECT * FROM hf
+        where toblogid = #{blogid}
+    </select>
+
+    <insert id="addHF" parameterType="pojoVO">
+        INSERT into
+        hf(text, userid, toblogid) VALUES
+        (#{hf.text}, #{hf.userid}, #{hf.toblogid})
+    </insert>
+</mapper>
